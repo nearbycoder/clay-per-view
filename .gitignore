@@ -1,0 +1,10 @@
+.DS_Store
+
+# Browser version: dependencies and build output
+web/node_modules/
+web/dist/
+
+# Large release files are attached to the GitHub release instead of living in the repository
+Release/*.zip
+Release/*.mp4
+Release/Clay-Per-View/

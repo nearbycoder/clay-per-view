@@ -1,0 +1,23 @@
+CLAY-PER-VIEW • FAMOUS LAST BLOWS
+
+A fictional late-night wrestling broadcast starring Rex Granite, Lola Glitz,
+Chef Bruno Flambe, Chip Sterling, DJ Wubz, Duchess Winnifred, Vince Voltage
+and Madame Mystica. Dirk Bluster and Nigel Quibble call the action.
+
+The character, arena and prop meshes were built in Blender. Unreal Engine
+runs the game and its stepped puppet animation. Fight effects, entrance
+music, crowd beds and the score were synthesized for the production.
+
+Original scripted dialogue is performed with the open-weight Kokoro-82M v1.0
+text-to-speech model, rendered offline using kokoro-onnx. Voice presets are
+Onyx (ring announcer and coach), Puck (Dirk), and George (Nigel).
+https://huggingface.co/hexgrad/Kokoro-82M
+https://github.com/thewh1teagle/kokoro-onnx
+
+Typeface credits and complete SIL Open Font Licenses for Titan One, Anton,
+Barlow Condensed and Bangers are in the Fonts folder. The engine's staged
+third-party notice is included in the app under Contents/UE/NOTICES.txt.
+
+Clay-Per-View uses Unreal® Engine. Unreal® is a trademark or registered
+trademark of Epic Games, Inc. in the United States of America and elsewhere.
+Unreal® Engine, Copyright 1998 – 2026, Epic Games, Inc. All rights reserved.

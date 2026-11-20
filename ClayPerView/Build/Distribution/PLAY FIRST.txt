@@ -1,0 +1,48 @@
+CLAY-PER-VIEW
+Famous Last Blows • macOS • 1.0.0
+
+Open Clay-Per-View.app to go on air. The game runs offline on Apple silicon.
+Extract the whole archive before launching. Sound and picture settings are saved locally.
+
+YOUR FIRST BROADCAST
+
+Choose Ring School for a hands-on rehearsal. Walk over to Chip, land a jab,
+catch a punch on your guard, grab and body-slam him, then fire your signature.
+
+Choose Ratings Run and cast your star. Each of the three broadcasts has a
+different opponent and an optional crowd challenge. Bank up to three stars
+per bout. The finalist who wins Prime Time gets the television title belt.
+Each headliner keeps a personal best on each difficulty.
+
+Exhibition lets you cast both corners. For a couch match choose Two Players.
+During knockouts, get close to your reeling rival and press Signature to
+trigger your star's Curtain Call. With exhibition pins enabled, slam your opponent,
+then press Grab beside them with empty hands. The defender can tap Jab when
+the moving needle enters gold. Three counts wins the round.
+
+CONTROLS
+
+Menus          Arrows or WASD • Enter to select • Esc to return • mouse to click
+Solo           WASD move • J jab • K heavy • L grab or throw • I hold guard
+               Space dodge • Left Shift run • U signature • O taunt • P / Esc pause
+Two players    Left: WASD move, F/G/H/R strike/heavy/grab/guard, T signature
+               Right: arrows move, comma/period/slash/M strike/heavy/grab/guard
+               N dodge, Right Shift run, L signature, semicolon taunt
+Gamepad        Stick move • X jab • Y heavy • B grab • RB guard • A dodge
+               RT run • LB signature • Start pause (Xbox button names)
+
+For a quieter broadcast, open Options > Sound Mixer. Master, music, voices,
+effects, crowd and menu sounds have separate levels. Dialogue captions cover
+the booth, announcer and coach in English or Brazilian Portuguese.
+Under Picture Quality, try High first and watch the live FPS and frame time.
+Change shadows, effects or render scale to find the balance for your Mac.
+Impact camera shake and arena flash bulbs can be switched off under Options.
+
+GUIA RÁPIDO • PORTUGUÊS (BRASIL)
+
+Abra o aplicativo e escolha Ring School para ensaiar. No modo solo, ande com
+WASD, use J para um jab, I para defender, L para agarrar e K para derrubar.
+Com a barra cheia, U ativa o golpe especial. Em Ratings Run, vença três lutas
+para conquistar o cinturão. Cada desafio da torcida rende uma estrela extra.
+Para ativar as legendas em português, entre em Options > Sound Mixer,
+deixe Dialogue subtitles em ON e mude Subtitle language para PORTUGUÊS (BR).
