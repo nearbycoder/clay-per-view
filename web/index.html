@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Clay-Per-View: Famous Last Blows | A clay wrestling brawler you can play in your browser</title>
+  <meta name="description" content="Eight clay celebrities have three live broadcasts to win a television title belt. Play Clay-Per-View free in your browser, or download the Mac version.">
+  <meta name="theme-color" content="#120a1f">
+  <meta name="color-scheme" content="dark">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Clay-Per-View">
+  <meta property="og:title" content="Clay-Per-View: Famous Last Blows">
+  <meta property="og:description" content="Eight clay celebrities have three live broadcasts to win a television title belt. Even the prop department gets a say. Play it in your browser.">
+  <meta property="og:image" content="https://nearbycoder.github.io/clay-per-view/media/share.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Clay-Per-View: Famous Last Blows. Eight stars. Three bouts. One belt.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Clay-Per-View: Famous Last Blows">
+  <meta name="twitter:description" content="A clay wrestling brawler staged like a late-night broadcast. Play it in your browser.">
+  <meta name="twitter:image" content="https://nearbycoder.github.io/clay-per-view/media/share.jpg">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="media/apple-touch-icon.png">
+
+  <link rel="preload" href="assets/fonts/TitanOne-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/BarlowCondensed-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/Anton-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="media/belt-640.webp" as="image" type="image/webp" imagesrcset="media/belt-640.webp 640w, media/belt-1200.webp 1200w" imagesizes="(min-width: 900px) 500px, 62vw" fetchpriority="high">
+
+  <!-- The game's own typefaces, served from this site (SIL Open Font License; texts in assets/fonts). -->
+  <style>
+    @font-face { font-family: "Titan One"; src: url("assets/fonts/TitanOne-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Anton"; src: url("assets/fonts/Anton-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Bangers"; src: url("assets/fonts/Bangers-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Barlow Condensed"; src: url("assets/fonts/BarlowCondensed-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Barlow Condensed"; src: url("assets/fonts/BarlowCondensed-SemiBold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Barlow Condensed"; src: url("assets/fonts/BarlowCondensed-ExtraBoldItalic.woff2") format("woff2"); font-weight: 800; font-style: italic; font-display: swap; }
+  </style>
+  <link rel="stylesheet" href="site/site.css">
+  <script type="module" src="site/site.ts"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to the show</a>
+
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.2v15.6a1 1 0 0 0 1.53.85l12.3-7.8a1 1 0 0 0 0-1.7L8.53 3.35A1 1 0 0 0 7 4.2z"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3a1.2 1.2 0 0 1 1.2 1.2v8.2l2.75-2.75a1.2 1.2 0 0 1 1.7 1.7l-4.8 4.8a1.2 1.2 0 0 1-1.7 0l-4.8-4.8a1.2 1.2 0 0 1 1.7-1.7l2.75 2.75V4.2A1.2 1.2 0 0 1 12 3zM5 18.6h14a1.2 1.2 0 0 1 0 2.4H5a1.2 1.2 0 0 1 0-2.4z"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="M8.7 6.3a1.2 1.2 0 0 1 0 1.7L4.7 12l4 4a1.2 1.2 0 0 1-1.7 1.7l-4.85-4.85a1.2 1.2 0 0 1 0-1.7L7 6.3a1.2 1.2 0 0 1 1.7 0zm6.6 0a1.2 1.2 0 0 1 1.7 0l4.85 4.85a1.2 1.2 0 0 1 0 1.7L17 17.7a1.2 1.2 0 0 1-1.7-1.7l4-4-4-4a1.2 1.2 0 0 1 0-1.7zM13.6 4.1a1.2 1.2 0 0 1 .85 1.47l-3.6 13.5a1.2 1.2 0 1 1-2.32-.62l3.6-13.5a1.2 1.2 0 0 1 1.47-.85z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.5l-5.9 3.2 1.2-6.6L2.5 9.5l6.6-.9z"/></symbol>
+  </svg>
+
+  <header class="masthead">
+    <div class="wrap masthead-row">
+      <a class="bug" href="#top" aria-label="Clay-Per-View: top of the page">
+        <img src="favicon.svg" width="36" height="36" alt="">
+        <span class="bug-name">Clay-Per-View</span>
+        <span class="bug-live"><i></i>Live</span>
+      </a>
+      <nav class="masthead-nav" aria-label="Sections">
+        <a href="#trailer">Trailer</a>
+        <a href="#show">The show</a>
+        <a href="#cast">Cast</a>
+        <a href="#screens">Screens</a>
+        <a href="#controls">How to play</a>
+        <a href="#get">Get it</a>
+      </nav>
+      <a class="btn btn-play btn-small" href="play/"><span><svg width="16" height="16" aria-hidden="true"><use href="#i-play"/></svg>Play now</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============================================================ hero -->
+    <section class="hero" id="top" aria-labelledby="title">
+      <div class="hero-lights" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="wrap hero-inner">
+        <p class="hero-badge"><i></i>Now playing in your browser</p>
+        <img class="hero-belt" src="media/belt-640.webp" srcset="media/belt-640.webp 640w, media/belt-1200.webp 1200w" sizes="(min-width: 900px) 500px, 62vw"
+             width="1200" height="430" fetchpriority="high" decoding="async"
+             alt="The television title belt: a gold TV set with red-tipped antennae on a leather strap, lettered CPV and Prime Time.">
+        <h1 class="title" id="title">
+          <span class="title-word"><span>Clay-</span><span>Per-</span><span>View</span></span>
+          <span class="vh">: </span>
+          <span class="title-banner"><span>Famous Last Blows</span></span>
+        </h1>
+        <p class="hero-pitch">Eight clay celebrities have three live broadcasts to win a television title belt. Even the prop department gets a say.</p>
+        <div class="hero-cta">
+          <a class="btn btn-play btn-big" href="play/"><span><svg width="22" height="22" aria-hidden="true"><use href="#i-play"/></svg>Play in your browser</span></a>
+          <a class="btn btn-ghost" href="https://github.com/nearbycoder/clay-per-view/releases/latest"><span><svg width="20" height="20" aria-hidden="true"><use href="#i-download"/></svg>Download for Mac</span></a>
+        </div>
+        <p class="hero-note">Free to play &middot; 1 or 2 players &middot; keyboard, gamepad or touch &middot; nothing to install in the browser
+          <a href="https://github.com/nearbycoder/clay-per-view"><svg width="16" height="16" aria-hidden="true"><use href="#i-code"/></svg>Source on GitHub</a></p>
+      </div>
+      <ul class="lineup" aria-label="Jump to a headliner">
+        <li><a href="#rex"><img src="media/cast/rex-256.webp" srcset="media/cast/rex-256.webp 256w, media/cast/rex-512.webp 512w" sizes="(min-width: 1100px) 170px, 15vw" width="512" height="512" alt="" decoding="async"><span>Rex Granite</span></a></li>
+        <li><a href="#lola"><img src="media/cast/lola-256.webp" srcset="media/cast/lola-256.webp 256w, media/cast/lola-512.webp 512w" sizes="(min-width: 1100px) 170px, 15vw" width="512" height="512" alt="" decoding="async"><span>Lola Glitz</span></a></li>
+        <li><a href="#bruno"><img src="media/cast/bruno-256.webp" srcset="media/cast/bruno-256.webp 256w, media/cast/bruno-512.webp 512w" sizes="(min-width: 1100px) 170px, 15vw" width="512" height="512" alt="" decoding="async"><span>Chef Bruno Flambe</span></a></li>
+        <li><a href="#chip"><img src="media/cast/chip-256.webp" srcset="media/cast/chip-256.webp 256w, media/cast/chip-512.webp 512w" sizes="(min-width: 1100px) 170px, 15vw" width="512" height="512" alt="" decoding="async"><span>Chip Sterling</span></a></li>
+        <li><a href="#wubz"><img src="media/cast/wubz-256.webp" srcset="media/cast/wubz-256.webp 256w, media/cast/wubz-512.webp 512w" sizes="(min-width: 1100px) 170px, 15vw" width="512" height="512" alt="" decoding="async"><span>DJ Wubz</span></a></li>
+        <li><a href="#duchess"><img src="media/cast/duchess-256.webp" srcset="media/cast/duchess-256.webp 256w, media/cast/duchess-512.webp 512w" sizes="(min-width: 1100px) 170px, 15vw" width="512" height="512" alt="" decoding="async"><span>Duchess Winnifred</span></a></li>
+        <li><a href="#vince"><img src="media/cast/vince-256.webp" srcset="media/cast/vince-256.webp 256w, media/cast/vince-512.webp 512w" sizes="(min-width: 1100px) 170px, 15vw" width="512" height="512" alt="" decoding="async"><span>Vince Voltage</span></a></li>
+        <li><a href="#mystica"><img src="media/cast/mystica-256.webp" srcset="media/cast/mystica-256.webp 256w, media/cast/mystica-512.webp 512w" sizes="(min-width: 1100px) 170px, 15vw" width="512" height="512" alt="" decoding="async"><span>Madame Mystica</span></a></li>
+      </ul>
+      <div class="ropes" aria-hidden="true"><i></i><i></i><i></i></div>
+    </section>
+
+    <!-- ============================================================ booth ticker -->
+    <aside class="ticker" aria-label="From the commentary booth">
+      <p class="ticker-tag">From the booth</p>
+      <input class="ticker-toggle vh" type="checkbox" id="ticker-pause" aria-label="Pause the scrolling quotes">
+      <label class="ticker-pause" for="ticker-pause" aria-hidden="true"></label>
+      <div class="ticker-window">
+        <ul class="ticker-track">
+          <li><b>Dirk Bluster</b> &ldquo;Welcome to Clay-Per-View, where the stars come out... and get flattened!&rdquo;</li>
+          <li><b>Nigel Quibble</b> &ldquo;Two egos enter. One publicist leaves in tears.&rdquo;</li>
+          <li><b>Dirk Bluster</b> &ldquo;Strap in, folks! Somebody&rsquo;s career ends tonight!&rdquo;</li>
+          <li><b>Nigel Quibble</b> &ldquo;I&rsquo;m told this is all fictional. The dental bills are not.&rdquo;</li>
+          <li><b>Dirk Bluster</b> &ldquo;OHHH! That one rearranged the furniture!&rdquo;</li>
+          <li><b>Nigel Quibble</b> &ldquo;The makeup department is going to need a trowel.&rdquo;</li>
+        </ul>
+        <ul class="ticker-track ticker-repeat" aria-hidden="true">
+          <li><b>Dirk Bluster</b> &ldquo;Welcome to Clay-Per-View, where the stars come out... and get flattened!&rdquo;</li>
+          <li><b>Nigel Quibble</b> &ldquo;Two egos enter. One publicist leaves in tears.&rdquo;</li>
+          <li><b>Dirk Bluster</b> &ldquo;Strap in, folks! Somebody&rsquo;s career ends tonight!&rdquo;</li>
+          <li><b>Nigel Quibble</b> &ldquo;I&rsquo;m told this is all fictional. The dental bills are not.&rdquo;</li>
+          <li><b>Dirk Bluster</b> &ldquo;OHHH! That one rearranged the furniture!&rdquo;</li>
+          <li><b>Nigel Quibble</b> &ldquo;The makeup department is going to need a trowel.&rdquo;</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- ============================================================ trailer -->
+    <section class="band" id="trailer" aria-labelledby="trailer-title">
+      <div class="wrap">
+        <header class="lt">
+          <p class="lt-kick">Roll tape</p>
+          <h2 class="lt-title" id="trailer-title"><span>The trailer</span></h2>
+          <p class="lt-sub"><span>Forty-six seconds. One clapperboard does not make it.</span></p>
+        </header>
+        <div class="tv">
+          <video id="trailer-video" controls playsinline preload="none" poster="media/trailer-poster.webp" width="1280" height="720" aria-label="Clay-Per-View gameplay trailer, 46 seconds">
+            <source src="media/trailer-720.mp4" type="video/mp4">
+            <track kind="captions" src="media/trailer-en.vtt" srclang="en" label="English">
+            <track kind="captions" src="media/trailer-pt-BR.vtt" srclang="pt-BR" label="Portugu&ecirc;s (Brasil)">
+            <p>Your browser cannot play this video here. <a href="media/trailer-720.mp4">Download the trailer (MP4, 7.5 MB)</a>.</p>
+          </video>
+          <span class="tv-bug" aria-hidden="true"><i></i>CPV Live</span>
+        </div>
+        <p class="fine">Captions in English and Brazilian Portuguese are in the player&rsquo;s caption menu. The trailer and the stills further down were captured from the desktop game; the browser version uses the same models, animation and audio with its own renderer.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================ the show -->
+    <section class="band band-stage" id="show" aria-labelledby="show-title">
+      <div class="wrap">
+        <header class="lt">
+          <p class="lt-kick">Tonight&rsquo;s running order</p>
+          <h2 class="lt-title" id="show-title"><span>What&rsquo;s on</span></h2>
+          <p class="lt-sub"><span>A wrestling brawler staged like a late-night broadcast.</span></p>
+        </header>
+        <div class="listings">
+          <section class="listing" aria-labelledby="l-modes">
+            <h3 id="l-modes"><span>Part one</span> The modes</h3>
+            <dl>
+              <div>
+                <dt>Ratings Run</dt>
+                <dd>Three broadcasts stand between your star and the television belt: the Cold Open, the Prop Department and Prime Time. Each can earn three stars: one for the win, one for finishing with at least half your health, one for the crowd&rsquo;s challenge.</dd>
+              </div>
+              <div>
+                <dt>Ring School</dt>
+                <dd>The coach walks you through a jab, a block, a body slam and a signature against a live partner, then sends you to casting.</dd>
+              </div>
+              <div>
+                <dt>Two Players</dt>
+                <dd>One keyboard shared down the middle, or a gamepad each, for a couch exhibition.</dd>
+              </div>
+              <div>
+                <dt>Exhibition and Watch a Bout</dt>
+                <dd>Cast both corners and set the rules. Or let the computer play both sides and listen to the booth.</dd>
+              </div>
+            </dl>
+          </section>
+          <section class="listing" aria-labelledby="l-fight">
+            <h3 id="l-fight"><span>Part two</span> The fight</h3>
+            <dl>
+              <div>
+                <dt>Signatures and Curtain Calls</dt>
+                <dd>Landing hits, taking hits and taunting fill your ratings. A full bar buys your signature move. Knock a rival out in the deciding round and they are left reeling: get close, press Signature, and the Curtain Call does the rest.</dd>
+              </div>
+              <div>
+                <dt>The crowd throws things in</dt>
+                <dd>Folding chair, guitar, gold star award, frying pan, mallet, rubber chicken and a studio clapperboard. Pick one up, swing it, throw it.</dd>
+              </div>
+              <div>
+                <dt>Pinfalls</dt>
+                <dd>With pins switched on in an exhibition, cover a downed opponent. The defender taps jab in the gold zone to kick out before the referee counts three.</dd>
+              </div>
+              <div>
+                <dt>Instant Replay</dt>
+                <dd>The results screen can play back the closing seconds from the arena camera.</dd>
+              </div>
+            </dl>
+          </section>
+          <section class="listing" aria-labelledby="l-production">
+            <h3 id="l-production"><span>Part three</span> The production</h3>
+            <dl>
+              <div>
+                <dt>Stepped stop-motion</dt>
+                <dd>Every clip is a handful of hand-sculpted poses, shown at 12 frames per second by default, with replacement mouths and hands the way stop-motion animators do it.</dd>
+              </div>
+              <div>
+                <dt>A full house</dt>
+                <dd>6,700 spectators sit, stand, bob and wave as the bout heats up. Some of them brought placards.</dd>
+              </div>
+              <div>
+                <dt>The booth and the referee</dt>
+                <dd>Dirk Bluster and Nigel Quibble call the action and have opinions. The referee counts, and can be flattened by a stray shot.</dd>
+              </div>
+              <div>
+                <dt>Subtitles and difficulty</dt>
+                <dd>Dialogue subtitles in English and Brazilian Portuguese, and three levels of computer opponent.</dd>
+              </div>
+            </dl>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ cast -->
+    <section class="band" id="cast" aria-labelledby="cast-title">
+      <div class="wrap">
+        <header class="lt">
+          <p class="lt-kick">Casting</p>
+          <h2 class="lt-title" id="cast-title"><span>The headliners</span></h2>
+          <p class="lt-sub"><span>Eight invented showbiz archetypes. Pick one and ruin the other seven.</span></p>
+        </header>
+        <div class="stars">
+          <article class="star" id="rex" style="--accent:#d63c2c">
+            <div class="star-photo"><img src="media/cast/rex-256.webp" srcset="media/cast/rex-256.webp 256w, media/cast/rex-512.webp 512w" sizes="(min-width: 1040px) 250px, (min-width: 600px) 42vw, 120px" width="512" height="512" loading="lazy" decoding="async" alt="Rex Granite, a thick-necked clay action hero with a red headband and an ammunition belt."></div>
+            <div class="star-body">
+              <h3>Rex Granite</h3>
+              <p class="star-bill">Straight-to-Streaming Action Hero</p>
+              <blockquote>&ldquo;I do my own stunts. And yours.&rdquo;</blockquote>
+              <dl class="stats">
+                <div><dt>Power</dt><dd><span class="pips" style="--n:5" role="img" aria-label="5 out of 5"></span></dd></div>
+                <div><dt>Speed</dt><dd><span class="pips" style="--n:2" role="img" aria-label="2 out of 5"></span></dd></div>
+                <div><dt>Guts</dt><dd><span class="pips" style="--n:4" role="img" aria-label="4 out of 5"></span></dd></div>
+              </dl>
+              <dl class="moves">
+                <div><dt>Signature</dt><dd>Box Office Bomb</dd></div>
+                <div><dt>Curtain Call</dt><dd>Director&rsquo;s Cut</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="star" id="lola" style="--accent:#ff2d95">
+            <div class="star-photo"><img src="media/cast/lola-256.webp" srcset="media/cast/lola-256.webp 256w, media/cast/lola-512.webp 512w" sizes="(min-width: 1040px) 250px, (min-width: 600px) 42vw, 120px" width="512" height="512" loading="lazy" decoding="async" alt="Lola Glitz, a clay pop star with a blonde ponytail, blue eyeshadow, a headset microphone and a pink sequinned dress."></div>
+            <div class="star-body">
+              <h3>Lola Glitz</h3>
+              <p class="star-bill">Chart-Topping Pop Diva</p>
+              <blockquote>&ldquo;You may clap now.&rdquo;</blockquote>
+              <dl class="stats">
+                <div><dt>Power</dt><dd><span class="pips" style="--n:2" role="img" aria-label="2 out of 5"></span></dd></div>
+                <div><dt>Speed</dt><dd><span class="pips" style="--n:5" role="img" aria-label="5 out of 5"></span></dd></div>
+                <div><dt>Guts</dt><dd><span class="pips" style="--n:2" role="img" aria-label="2 out of 5"></span></dd></div>
+              </dl>
+              <dl class="moves">
+                <div><dt>Signature</dt><dd>High Note</dd></div>
+                <div><dt>Curtain Call</dt><dd>Mic Drop</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="star" id="bruno" style="--accent:#f0ece2">
+            <div class="star-photo"><img src="media/cast/bruno-256.webp" srcset="media/cast/bruno-256.webp 256w, media/cast/bruno-512.webp 512w" sizes="(min-width: 1040px) 250px, (min-width: 600px) 42vw, 120px" width="512" height="512" loading="lazy" decoding="async" alt="Chef Bruno Flambe, a red-nosed clay chef with a tall white hat, a curled black moustache and chef&rsquo;s whites."></div>
+            <div class="star-body">
+              <h3>Chef Bruno Flambe</h3>
+              <p class="star-bill">Volcanic TV Chef</p>
+              <blockquote>&ldquo;It&rsquo;s raw! Like you!&rdquo;</blockquote>
+              <dl class="stats">
+                <div><dt>Power</dt><dd><span class="pips" style="--n:4" role="img" aria-label="4 out of 5"></span></dd></div>
+                <div><dt>Speed</dt><dd><span class="pips" style="--n:2" role="img" aria-label="2 out of 5"></span></dd></div>
+                <div><dt>Guts</dt><dd><span class="pips" style="--n:5" role="img" aria-label="5 out of 5"></span></dd></div>
+              </dl>
+              <dl class="moves">
+                <div><dt>Signature</dt><dd>Flambe</dd></div>
+                <div><dt>Curtain Call</dt><dd>Order Up!</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="star" id="chip" style="--accent:#8e959f">
+            <div class="star-photo"><img src="media/cast/chip-256.webp" srcset="media/cast/chip-256.webp 256w, media/cast/chip-512.webp 512w" sizes="(min-width: 1040px) 250px, (min-width: 600px) 42vw, 120px" width="512" height="512" loading="lazy" decoding="async" alt="Chip Sterling, a clay tech billionaire with brown hair, heavy black glasses and a grey hoodie."></div>
+            <div class="star-body">
+              <h3>Chip Sterling</h3>
+              <p class="star-bill">Tech Billionaire, Allegedly Human</p>
+              <blockquote>&ldquo;Your face is my next acquisition.&rdquo;</blockquote>
+              <dl class="stats">
+                <div><dt>Power</dt><dd><span class="pips" style="--n:2" role="img" aria-label="2 out of 5"></span></dd></div>
+                <div><dt>Speed</dt><dd><span class="pips" style="--n:4" role="img" aria-label="4 out of 5"></span></dd></div>
+                <div><dt>Guts</dt><dd><span class="pips" style="--n:2" role="img" aria-label="2 out of 5"></span></dd></div>
+              </dl>
+              <dl class="moves">
+                <div><dt>Signature</dt><dd>Push Notification</dd></div>
+                <div><dt>Curtain Call</dt><dd>Launch Day</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="star" id="wubz" style="--accent:#39e75f">
+            <div class="star-photo"><img src="media/cast/wubz-256.webp" srcset="media/cast/wubz-256.webp 256w, media/cast/wubz-512.webp 512w" sizes="(min-width: 1040px) 250px, (min-width: 600px) 42vw, 120px" width="512" height="512" loading="lazy" decoding="async" alt="DJ Wubz, a clay DJ in a white helmet with purple headphones, a glowing visor for a face and a green top."></div>
+            <div class="star-body">
+              <h3>DJ Wubz</h3>
+              <p class="star-bill">Festival Headliner, Face Unknown</p>
+              <blockquote>&ldquo;...&rdquo; <span class="aside">(the visor shows a thumbs-up)</span></blockquote>
+              <dl class="stats">
+                <div><dt>Power</dt><dd><span class="pips" style="--n:3" role="img" aria-label="3 out of 5"></span></dd></div>
+                <div><dt>Speed</dt><dd><span class="pips" style="--n:4" role="img" aria-label="4 out of 5"></span></dd></div>
+                <div><dt>Guts</dt><dd><span class="pips" style="--n:3" role="img" aria-label="3 out of 5"></span></dd></div>
+              </dl>
+              <dl class="moves">
+                <div><dt>Signature</dt><dd>Bass Drop</dd></div>
+                <div><dt>Curtain Call</dt><dd>Wall of Sound</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="star" id="duchess" style="--accent:#8a63d2">
+            <div class="star-photo"><img src="media/cast/duchess-256.webp" srcset="media/cast/duchess-256.webp 256w, media/cast/duchess-512.webp 512w" sizes="(min-width: 1040px) 250px, (min-width: 600px) 42vw, 120px" width="512" height="512" loading="lazy" decoding="async" alt="Duchess Winnifred, a pale clay royal with a towering white wig, a jewelled tiara and a purple gown with a red sash."></div>
+            <div class="star-body">
+              <h3>Duchess Winnifred</h3>
+              <p class="star-bill">Frostiest Royal in the Tabloids</p>
+              <blockquote>&ldquo;One does not sweat. One glistens.&rdquo;</blockquote>
+              <dl class="stats">
+                <div><dt>Power</dt><dd><span class="pips" style="--n:3" role="img" aria-label="3 out of 5"></span></dd></div>
+                <div><dt>Speed</dt><dd><span class="pips" style="--n:3" role="img" aria-label="3 out of 5"></span></dd></div>
+                <div><dt>Guts</dt><dd><span class="pips" style="--n:3" role="img" aria-label="3 out of 5"></span></dd></div>
+              </dl>
+              <dl class="moves">
+                <div><dt>Signature</dt><dd>Royal Decree</dd></div>
+                <div><dt>Curtain Call</dt><dd>Off With the Head</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="star" id="vince" style="--accent:#d12a36">
+            <div class="star-photo"><img src="media/cast/vince-256.webp" srcset="media/cast/vince-256.webp 256w, media/cast/vince-512.webp 512w" sizes="(min-width: 1040px) 250px, (min-width: 600px) 42vw, 120px" width="512" height="512" loading="lazy" decoding="async" alt="Vince Voltage, a clay rock singer with long black hair, tattooed arms and a black leather vest."></div>
+            <div class="star-body">
+              <h3>Vince Voltage</h3>
+              <p class="star-bill">Stadium Rock Survivor</p>
+              <blockquote>&ldquo;This one goes out to your dentist.&rdquo;</blockquote>
+              <dl class="stats">
+                <div><dt>Power</dt><dd><span class="pips" style="--n:3" role="img" aria-label="3 out of 5"></span></dd></div>
+                <div><dt>Speed</dt><dd><span class="pips" style="--n:3" role="img" aria-label="3 out of 5"></span></dd></div>
+                <div><dt>Guts</dt><dd><span class="pips" style="--n:3" role="img" aria-label="3 out of 5"></span></dd></div>
+              </dl>
+              <dl class="moves">
+                <div><dt>Signature</dt><dd>Power Chord</dd></div>
+                <div><dt>Curtain Call</dt><dd>Encore</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="star" id="mystica" style="--accent:#1c9aa2">
+            <div class="star-photo"><img src="media/cast/mystica-256.webp" srcset="media/cast/mystica-256.webp 256w, media/cast/mystica-512.webp 512w" sizes="(min-width: 1040px) 250px, (min-width: 600px) 42vw, 120px" width="512" height="512" loading="lazy" decoding="async" alt="Madame Mystica, a clay fortune teller in a purple turban with a red jewel and a white feather, gold hoop earrings and a teal robe flecked with gold."></div>
+            <div class="star-body">
+              <h3>Madame Mystica</h3>
+              <p class="star-bill">Late-Night TV Psychic</p>
+              <blockquote>&ldquo;I foresee a lot of pain in your future.&rdquo;</blockquote>
+              <dl class="stats">
+                <div><dt>Power</dt><dd><span class="pips" style="--n:3" role="img" aria-label="3 out of 5"></span></dd></div>
+                <div><dt>Speed</dt><dd><span class="pips" style="--n:2" role="img" aria-label="2 out of 5"></span></dd></div>
+                <div><dt>Guts</dt><dd><span class="pips" style="--n:4" role="img" aria-label="4 out of 5"></span></dd></div>
+              </dl>
+              <dl class="moves">
+                <div><dt>Signature</dt><dd>Crystal Ball</dd></div>
+                <div><dt>Curtain Call</dt><dd>Tiny Fate</dd></div>
+              </dl>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ screens -->
+    <section class="band band-stage" id="screens" aria-labelledby="screens-title">
+      <div class="wrap">
+        <header class="lt">
+          <p class="lt-kick">From the broadcast</p>
+          <h2 class="lt-title" id="screens-title"><span>Screens</span></h2>
+          <p class="lt-sub"><span>Stills from the desktop game.</span></p>
+        </header>
+        <div class="shots">
+          <figure class="shot shot-wide">
+            <a href="media/key-art-1600.webp"><img src="media/key-art-960.webp" srcset="media/key-art-640.webp 640w, media/key-art-960.webp 960w, media/key-art-1600.webp 1600w" sizes="(min-width: 900px) 580px, (min-width: 640px) 46vw, 82vw" width="1600" height="900" loading="lazy" decoding="async" alt="Key art: the title over a purple backdrop with the television belt, flanked by Vince Voltage and Madame Mystica. Eight stars. Three bouts. One belt."></a>
+            <figcaption>The key art. Eight stars, three bouts, one belt.</figcaption>
+          </figure>
+          <figure class="shot shot-wide">
+            <a href="media/shots/arena-1600.webp"><img src="media/shots/arena-960.webp" srcset="media/shots/arena-640.webp 640w, media/shots/arena-960.webp 960w, media/shots/arena-1600.webp 1600w" sizes="(min-width: 900px) 580px, (min-width: 640px) 46vw, 82vw" width="1600" height="900" loading="lazy" decoding="async" alt="A wide shot of the arena: the ring under the lights, a packed crowd holding placards, and Duchess Winnifred walking down the ramp."></a>
+            <figcaption>Duchess Winnifred enters through the crowd.</figcaption>
+          </figure>
+          <figure class="shot">
+            <a href="media/shots/casting-1600.webp"><img src="media/shots/casting-640.webp" srcset="media/shots/casting-640.webp 640w, media/shots/casting-960.webp 960w, media/shots/casting-1600.webp 1600w" sizes="(min-width: 900px) 380px, (min-width: 640px) 46vw, 82vw" width="1600" height="900" loading="lazy" decoding="async" alt="The casting screen: Lola Glitz and Madame Mystica stand in the ring above the roster of eight portraits and their stats."></a>
+            <figcaption>Lola Glitz gets a three-bout card and a first-round meeting with Madame Mystica.</figcaption>
+          </figure>
+          <figure class="shot">
+            <a href="media/shots/clapperboard-1600.webp"><img src="media/shots/clapperboard-640.webp" srcset="media/shots/clapperboard-640.webp 640w, media/shots/clapperboard-960.webp 960w, media/shots/clapperboard-1600.webp 1600w" sizes="(min-width: 900px) 380px, (min-width: 640px) 46vw, 82vw" width="1600" height="900" loading="lazy" decoding="async" alt="Chef Bruno swings a studio clapperboard at Vince Voltage while the referee looks on and a comic BAM hangs in the air."></a>
+            <figcaption>Chef Bruno borrows a clapperboard for his bout with Vince Voltage.</figcaption>
+          </figure>
+          <figure class="shot">
+            <a href="media/shots/three-count-1600.webp"><img src="media/shots/three-count-640.webp" srcset="media/shots/three-count-640.webp 640w, media/shots/three-count-960.webp 960w, media/shots/three-count-1600.webp 1600w" sizes="(min-width: 900px) 380px, (min-width: 640px) 46vw, 82vw" width="1600" height="900" loading="lazy" decoding="async" alt="Rex Granite pins Chip Sterling as the referee slaps the mat; a kick-out meter shows the gold zone."></a>
+            <figcaption>Rex hooks a cover while Chip tries to beat the count.</figcaption>
+          </figure>
+          <figure class="shot shot-wide">
+            <a href="media/shots/mic-drop-1600.webp"><img src="media/shots/mic-drop-960.webp" srcset="media/shots/mic-drop-640.webp 640w, media/shots/mic-drop-960.webp 960w, media/shots/mic-drop-1600.webp 1600w" sizes="(min-width: 900px) 580px, (min-width: 640px) 46vw, 82vw" width="1600" height="900" loading="lazy" decoding="async" alt="Lola Glitz waves as a microphone the size of a car lands on her opponent in the ring."></a>
+            <figcaption>Lola makes good on the name of her finishing move.</figcaption>
+          </figure>
+          <figure class="shot shot-wide">
+            <a href="media/shots/title-belt-1600.webp"><img src="media/shots/title-belt-960.webp" srcset="media/shots/title-belt-640.webp 640w, media/shots/title-belt-960.webp 960w, media/shots/title-belt-1600.webp 1600w" sizes="(min-width: 900px) 580px, (min-width: 640px) 46vw, 82vw" width="1600" height="900" loading="lazy" decoding="async" alt="Rex Granite holds the television belt over his head beside a grinning referee as confetti falls."></a>
+            <figcaption>Rex holds the television belt after the final broadcast.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ how to play -->
+    <section class="band" id="controls" aria-labelledby="controls-title">
+      <div class="wrap">
+        <header class="lt">
+          <p class="lt-kick">Ring School</p>
+          <h2 class="lt-title" id="controls-title"><span>How to play</span></h2>
+          <p class="lt-sub"><span>Strikes beat grabs, grabs beat blocks, blocks beat strikes.</span></p>
+        </header>
+
+        <table class="keys" role="table">
+          <caption class="vh">Controls for one player, two players sharing a keyboard, and gamepads</caption>
+          <thead role="rowgroup">
+            <tr role="row">
+              <th scope="col" role="columnheader">Action</th>
+              <th scope="col" role="columnheader">One player</th>
+              <th scope="col" role="columnheader">Two players: left</th>
+              <th scope="col" role="columnheader">Two players: right</th>
+              <th scope="col" role="columnheader">Gamepad</th>
+            </tr>
+          </thead>
+          <tbody role="rowgroup">
+            <tr role="row">
+              <th scope="row" role="rowheader">Move</th>
+              <td role="cell" data-label="One player"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></td>
+              <td role="cell" data-label="2P left"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></td>
+              <td role="cell" data-label="2P right"><kbd>Arrows</kbd></td>
+              <td role="cell" data-label="Gamepad"><span class="pad">Left stick</span></td>
+            </tr>
+            <tr role="row">
+              <th scope="row" role="rowheader">Jab <small>tap for a combo</small></th>
+              <td role="cell" data-label="One player"><kbd>J</kbd></td>
+              <td role="cell" data-label="2P left"><kbd>F</kbd></td>
+              <td role="cell" data-label="2P right"><kbd><span aria-hidden="true">,</span><span class="vh">comma</span></kbd></td>
+              <td role="cell" data-label="Gamepad"><span class="pad">X / Square</span></td>
+            </tr>
+            <tr role="row">
+              <th scope="row" role="rowheader">Heavy hit</th>
+              <td role="cell" data-label="One player"><kbd>K</kbd></td>
+              <td role="cell" data-label="2P left"><kbd>G</kbd></td>
+              <td role="cell" data-label="2P right"><kbd><span aria-hidden="true">.</span><span class="vh">full stop</span></kbd></td>
+              <td role="cell" data-label="Gamepad"><span class="pad">Y / Triangle</span></td>
+            </tr>
+            <tr role="row">
+              <th scope="row" role="rowheader">Grab <small>pick up, throw</small></th>
+              <td role="cell" data-label="One player"><kbd>L</kbd></td>
+              <td role="cell" data-label="2P left"><kbd>H</kbd></td>
+              <td role="cell" data-label="2P right"><kbd><span aria-hidden="true">/</span><span class="vh">slash</span></kbd></td>
+              <td role="cell" data-label="Gamepad"><span class="pad">B / Circle</span></td>
+            </tr>
+            <tr role="row">
+              <th scope="row" role="rowheader">Block <small>hold</small></th>
+              <td role="cell" data-label="One player"><kbd>I</kbd></td>
+              <td role="cell" data-label="2P left"><kbd>R</kbd></td>
+              <td role="cell" data-label="2P right"><kbd>M</kbd></td>
+              <td role="cell" data-label="Gamepad"><span class="pad">RB</span></td>
+            </tr>
+            <tr role="row">
+              <th scope="row" role="rowheader">Dodge</th>
+              <td role="cell" data-label="One player"><kbd>Space</kbd></td>
+              <td role="cell" data-label="2P left"><kbd>Space</kbd></td>
+              <td role="cell" data-label="2P right"><kbd>N</kbd></td>
+              <td role="cell" data-label="Gamepad"><span class="pad">A / Cross</span></td>
+            </tr>
+            <tr role="row">
+              <th scope="row" role="rowheader">Run <small>hold</small></th>
+              <td role="cell" data-label="One player"><kbd>Left Shift</kbd></td>
+              <td role="cell" data-label="2P left"><kbd>Left Shift</kbd></td>
+              <td role="cell" data-label="2P right"><kbd>Right Shift</kbd></td>
+              <td role="cell" data-label="Gamepad"><span class="pad">RT</span></td>
+            </tr>
+            <tr role="row">
+              <th scope="row" role="rowheader">Signature <small>and Curtain Call</small></th>
+              <td role="cell" data-label="One player"><kbd>U</kbd></td>
+              <td role="cell" data-label="2P left"><kbd>T</kbd></td>
+              <td role="cell" data-label="2P right"><kbd>L</kbd></td>
+              <td role="cell" data-label="Gamepad"><span class="pad">LB</span></td>
+            </tr>
+            <tr role="row">
+              <th scope="row" role="rowheader">Taunt</th>
+              <td role="cell" data-label="One player"><kbd>O</kbd></td>
+              <td role="cell" data-label="2P left"><kbd>Y</kbd></td>
+              <td role="cell" data-label="2P right"><kbd><span aria-hidden="true">;</span><span class="vh">semicolon</span></kbd></td>
+              <td role="cell" data-label="Gamepad"><span class="pad">Back</span></td>
+            </tr>
+            <tr role="row">
+              <th scope="row" role="rowheader">Pause</th>
+              <td role="cell" data-label="Keyboard" colspan="3"><kbd>Esc</kbd> <span class="or">or</span> <kbd>P</kbd></td>
+              <td role="cell" data-label="Gamepad"><span class="pad">Start</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <ul class="key-notes">
+          <li>Menus take a click or a tap, or <kbd>W</kbd><kbd>S</kbd> or the arrow keys with <kbd>Enter</kbd> to select and <kbd>Esc</kbd> to go back.</li>
+          <li>The first gamepad is player one and a second gamepad is player two. With a single pad in a two-player bout, the pad plays the left side and the arrow-key half of the keyboard plays the right.</li>
+          <li>On a phone or tablet the browser version adds touch controls.</li>
+        </ul>
+
+        <h3 class="rules-title">House rules</h3>
+        <ul class="rules">
+          <li>
+            <h4>Strikes, grabs, blocks</h4>
+            <p>Strikes beat grabs, grabs beat blocks, blocks beat strikes. Three jabs chain into a cross and a launching uppercut. Heavy plus toward your opponent is a big boot; heavy on its own is a haymaker.</p>
+          </li>
+          <li>
+            <h4>A blocked strike recoils</h4>
+            <p>The combo stops and the attacker is open for a moment, so block, then hit back or grab. Catch a strike in the first 130 milliseconds of your guard for a clean block and extra ratings.</p>
+          </li>
+          <li>
+            <h4>In a grab</h4>
+            <p>Jab is a headbutt, heavy is a body slam, and grab plus a direction whips them into the ropes. Mash to escape a hold.</p>
+          </li>
+          <li>
+            <h4>The ropes are springy</h4>
+            <p>Run into them to rebound. Attacks out of a rebound hit harder: jab becomes a clothesline, heavy a dropkick.</p>
+          </li>
+          <li>
+            <h4>On the mat</h4>
+            <p>Against a downed opponent, jab is a stomp and heavy is a flying splash. Down yourself? Tap any button to get up sooner. You can only be hit twice while you are down.</p>
+          </li>
+          <li>
+            <h4>Ratings</h4>
+            <p>The bar under your health fills as you land hits, take hits and taunt. Full ratings buy your signature move. Taunting can also earn you something from the crowd.</p>
+          </li>
+          <li>
+            <h4>Curtain Call</h4>
+            <p>Lose the deciding round by knockout and you are left reeling on your feet. Your rival has a few seconds to get close and press Signature for their finishing move.</p>
+          </li>
+          <li>
+            <h4>Mirror match</h4>
+            <p>Pick the same celebrity for both corners and the one on the right turns up as a tinted stunt double.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================ get it -->
+    <section class="band band-stage" id="get" aria-labelledby="get-title">
+      <div class="wrap">
+        <header class="lt">
+          <p class="lt-kick">Tune in</p>
+          <h2 class="lt-title" id="get-title"><span>Two ways to play</span></h2>
+          <p class="lt-sub"><span>Both free. One of them needs no download at all.</span></p>
+        </header>
+        <div class="ways">
+          <article class="way way-browser">
+            <p class="way-burst" aria-hidden="true">No install!</p>
+            <h3>In your browser</h3>
+            <p>Press play and the bell rings. It runs in any current desktop browser with WebGL&nbsp;2, with a keyboard or gamepads. On phones and tablets it adds touch controls.</p>
+            <a class="btn btn-dark btn-big" href="play/"><span><svg width="22" height="22" aria-hidden="true"><use href="#i-play"/></svg>Play now</span></a>
+            <ul class="way-list">
+              <li>One or two players on one keyboard</li>
+              <li>Gamepads supported</li>
+              <li>Your options and records are saved in the browser</li>
+            </ul>
+          </article>
+          <article class="way way-mac">
+            <h3>On your Mac</h3>
+            <p>The desktop original, built on Unreal Engine&nbsp;5. For Apple silicon Macs running macOS&nbsp;14 or later. The download is about 415&nbsp;MB.</p>
+            <a class="btn btn-ghost btn-big" href="https://github.com/nearbycoder/clay-per-view/releases/latest"><span><svg width="20" height="20" aria-hidden="true"><use href="#i-download"/></svg>Download for Mac</span></a>
+            <div class="way-note">
+              <h4>Before the first launch</h4>
+              <p>The Mac build is not notarized by Apple, so macOS asks for confirmation the first time. Extract the whole archive, then right-click the app and choose <b>Open</b>, or allow it under <b>System Settings &rsaquo; Privacy &amp; Security</b>.</p>
+            </div>
+          </article>
+        </div>
+        <p class="ways-source"><svg width="18" height="18" aria-hidden="true"><use href="#i-code"/></svg> The whole production is on GitHub: game code, the Blender scripts that sculpt the cast, and this site. <a href="https://github.com/nearbycoder/clay-per-view">Browse the source</a></p>
+      </div>
+    </section>
+
+    <!-- ============================================================ credits -->
+    <section class="band" id="credits" aria-labelledby="credits-title">
+      <div class="wrap">
+        <header class="lt">
+          <p class="lt-kick">End credits</p>
+          <h2 class="lt-title" id="credits-title"><span>Made with</span></h2>
+          <p class="lt-sub"><span>Clay by script, voices by model, bruises by hand.</span></p>
+        </header>
+        <dl class="credits">
+          <div>
+            <dt>Engines</dt>
+            <dd>The desktop game is C++ on Unreal Engine&nbsp;5. The browser version is a TypeScript port on <a href="https://threejs.org/">three.js</a>, built from the same models, animation and audio.</dd>
+          </div>
+          <div>
+            <dt>Clay</dt>
+            <dd>Every model was sculpted by <a href="https://www.blender.org/">Blender</a> scripts: the eight headliners, the referee, the commentators, the ring, the arena, the crowd and the props.</dd>
+          </div>
+          <div>
+            <dt>Voices</dt>
+            <dd>Original scripted dialogue is performed by the open-weight <a href="https://huggingface.co/hexgrad/Kokoro-82M">Kokoro-82M</a> text-to-speech model (Apache-2.0), rendered ahead of time with <a href="https://github.com/thewh1teagle/kokoro-onnx">kokoro-onnx</a>. Voice presets: Onyx for the ring announcer and coach, Puck for Dirk, George for Nigel.</dd>
+          </div>
+          <div>
+            <dt>Sound</dt>
+            <dd>Fight effects, entrance music, crowd beds and the score were synthesized for the production.</dd>
+          </div>
+          <div>
+            <dt>Type</dt>
+            <dd>Titan One, Anton, Barlow Condensed and Bangers, under the SIL Open Font License (<a href="assets/fonts/OFL-TitanOne.txt">Titan One</a>, <a href="assets/fonts/OFL-Anton.txt">Anton</a>, <a href="assets/fonts/OFL-BarlowCondensed.txt">Barlow Condensed</a>, <a href="assets/fonts/OFL-Bangers.txt">Bangers</a>).</dd>
+          </div>
+          <div>
+            <dt>Production disclosure</dt>
+            <dd>Generative AI assisted the game design, dialogue, localization, programming, the Blender scripts that make the characters and scenery, and the music and effects synthesis scripts.</dd>
+          </div>
+          <div>
+            <dt>Fiction</dt>
+            <dd>The league, the belt, the commentators and all eight headliners are invented. No real person appears in the game.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <a class="bug" href="#top" aria-label="Back to the top">
+          <img src="favicon.svg" width="40" height="40" alt="" loading="lazy">
+          <span class="bug-name">Clay-Per-View</span>
+        </a>
+        <p class="footer-line">Famous Last Blows. Same time next week?</p>
+        <nav class="footer-nav" aria-label="Get the game">
+          <a href="play/">Play in your browser</a>
+          <a href="https://github.com/nearbycoder/clay-per-view/releases/latest">Download for Mac</a>
+          <a href="https://github.com/nearbycoder/clay-per-view">Source on GitHub</a>
+        </nav>
+      </div>
+      <div class="footer-fine">
+        <p>Fonts: Titan One, Anton, Barlow Condensed and Bangers (SIL Open Font License). Voices: Kokoro-82M (Apache-2.0). Browser version: three.js (MIT). <a href="THIRD-PARTY-NOTICES.txt">Open-source notices</a>. This site sets no cookies and loads nothing from other hosts.</p>
+        <p>Clay-Per-View uses Unreal&reg; Engine. Unreal&reg; is a trademark or registered trademark of Epic Games, Inc. in the United States of America and elsewhere. Mac and macOS are trademarks of Apple Inc.</p>
+        <p>Eric Fogel&rsquo;s accounts of staging MTV&rsquo;s <cite>Celebrity Deathmatch</cite> informed this game&rsquo;s broadcast format (<a href="https://www.awn.com/blog/battle-celebrity-deathmatch-part-1">on the ring concept</a>, <a href="https://www.awn.com/blog/battle-celebrity-deathmatch-part-3">on the broadcast cast</a>). Clay-Per-View is an original production and is not affiliated with that show.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>Play Clay-Per-View: Famous Last Blows</title>
+  <meta name="description" content="Play Clay-Per-View in your browser: eight clay celebrities, one ring, and a referee who should have stayed home.">
+  <meta name="theme-color" content="#0d0915">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <style>
+    html, body { margin: 0; height: 100%; background: #07050c; overflow: hidden; overscroll-behavior: none; }
+    body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #f4efe6; -webkit-user-select: none; user-select: none; touch-action: none; }
+    #stage { position: fixed; inset: 0; }
+    #view, #hud { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    #hud { pointer-events: none; }
+    #loading { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 22px; background: radial-gradient(120% 90% at 50% 40%, #2a1040 0%, #0d0915 62%, #07050c 100%); transition: opacity .5s ease; z-index: 10; padding: 24px; text-align: center; }
+    #loading.done { opacity: 0; pointer-events: none; }
+    #loading h1 { margin: 0; font: 400 clamp(34px, 7vw, 76px)/0.95 "Titan One", "Arial Black", Impact, sans-serif; letter-spacing: .01em; color: #ffc928; text-shadow: 0 .07em 0 #b3202a, 0 .12em 0 #2a0d14; }
+    #loading p.tag { margin: 0; padding: .35em 1.1em; background: #c1272d; color: #fff8e7; font: 700 clamp(13px, 2vw, 20px)/1 system-ui, sans-serif; letter-spacing: .22em; text-transform: uppercase; transform: skewX(-9deg); }
+    #loading .track { width: min(420px, 70vw); height: 12px; border-radius: 99px; background: rgba(255,255,255,.12); overflow: hidden; }
+    #loading-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #ffc928, #ff7a3d); transition: width .15s linear; }
+    #loading-note { margin: 0; font-size: 15px; color: #cfc4dc; min-height: 1.4em; max-width: 34em; }
+    #loading.failed .track { display: none; }
+    #loading.failed #loading-note { color: #ffd9d0; font-size: 17px; }
+    #loading a { color: #ffc928; }
+  </style>
+  <link rel="preload" href="../assets/fonts/TitanOne-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <style>@font-face { font-family: "Titan One"; src: url("../assets/fonts/TitanOne-Regular.woff2") format("woff2"); font-display: swap; }</style>
+</head>
+<body>
+  <div id="stage">
+    <canvas id="view"></canvas>
+    <canvas id="hud"></canvas>
+    <div id="loading" role="status" aria-live="polite">
+      <h1>CLAY-PER-VIEW</h1>
+      <p class="tag">Famous Last Blows</p>
+      <div class="track"><div id="loading-bar"></div></div>
+      <p id="loading-note">Rolling out the ring...</p>
+      <noscript><p>This game needs JavaScript. <a href="../">Back to the website</a></p></noscript>
+    </div>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
